@@ -454,9 +454,9 @@ class Checks():
         for i in res:
             print i[0]
 
-    def slave_running(self):
+    def subordinate_running(self):
         """
-        检测slave 线程是否在运行 IO tread 和 SQL tread 都运行则ON
+        检测subordinate 线程是否在运行 IO tread 和 SQL tread 都运行则ON
         """
         sql = "SELECT VARIABLE_VALUE \
                FROM INFORMATION_SCHEMA.GLOBAL_STATUS \
@@ -466,14 +466,14 @@ class Checks():
         for i in res:
             print i[0]
 
-    def slave_delayed(self):
+    def subordinate_delayed(self):
         """
-        Slave 落后 Master 时长，单位秒
+        Subordinate 落后 Main 时长，单位秒
         """
         sql = "SHOW SLAVE STATUS"
         self.cur_dict.execute(sql)
         res = self.cur_dict.fetchall()
-        print res[0]['Seconds_Behind_Master']
+        print res[0]['Seconds_Behind_Main']
 
 
 class Main(Checks):
